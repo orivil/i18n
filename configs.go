@@ -34,7 +34,7 @@ func GetFullName(shortName string) string {
 
 func init() {
 
-	cfg := config.NewConfig(filepath.Join(orivil.DirBundle, "i18n"))
+	cfg := config.NewConfig(filepath.Join(orivil.DirBundle, "i18n", "config"))
 
 	cfg.ReadStruct("i18n.yml", Config)
 
