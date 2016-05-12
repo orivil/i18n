@@ -1,6 +1,6 @@
 # i18n
 
-Orivil I18n bundle
+Orivil I18n Bundle
 
 ## Version
 
@@ -10,29 +10,27 @@ v1
 
 ## Install
 
-* make dir "i18n" under your project bundle dir
+* make dir "i18n" under your bundle dir
 * cd "i18n" dir
 * git init
 * git remote add i18n https://github.com/orivil/i18n
 * git pull i18n v1
 
-## Config "DataSender" Middleware
+## Display Languages
 
-"DataSender" middleware will send languages data to template:
+Use `DataSender` function to send data to template:
 
 ```GO
-func (this *Controller)SetMiddle(bag *middle.Bag) {
-
-    bag.Set(i18n.MidDataSender).OnlyActions("Index")
-} 
+i18n.DataSender(app) 
 ```
 
-Display languages in template:
+Display data:
 
 ```html
+{{if $.currentLang}}
 <span>{{$.currentLang}}</span>
 
-<ul class="dropdown-menu">
+<ul>
 
     {{/* range all languages */}}
     {{range $lang, $shortName := .i18nlangs}}
@@ -42,16 +40,17 @@ Display languages in template:
         {{end}}
     {{end}}
 </ul>
+{{end}}
 ```
 
-## Sent Ajax Request
+## Sent Ajax Request To Set Language
 
 ```html
 <script>
   $(document).ready(function() {
       $(".lang-set").on("click", function (e) {
     
-          e.preventDefault()
+          e.preventDefault();
     
           $.ajax({
               type: "GET",
@@ -76,5 +75,20 @@ Display languages in template:
 server.RegisterBundle (
 
     new(i18n.Register),
+)
+```
+
+## Generate I18n View File
+
+Run Server, it will auto generate i18n view file under "view" dir in each bundle.
+
+## Uninstall
+
+We should uninstall i18n bundle in development environment.
+
+```GO
+server.RegisterBundle (
+
+    // new(i18n.Register),
 )
 ```
