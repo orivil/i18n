@@ -1,0 +1,13 @@
+# set all languages, key for displaying, value for setting
+languages:
+  简体中文: "zh-CN"
+  english: "en"
+
+# set default language, must be the display name
+defaultlang: "简体中文"
+
+# cookie key
+cookiekey: "i18n_language"
+
+# set "true" will generate not exist view file when server start
+auto_generate_files: true
