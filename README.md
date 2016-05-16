@@ -8,6 +8,10 @@ Orivil I18n Bundle
 v1
 ```
 
+## Introduce
+
+**I18n Bundle** provide a full-featured i18n management system. Automatically generate template files and message files according to the language configuration. Make your project become international immediately, even if your project has been completed.
+
 ## Install
 
 * make dir "i18n" under your bundle dir
@@ -78,9 +82,9 @@ server.RegisterBundle (
 )
 ```
 
-## Generate I18n View File
+## Generate I18n View Files
 
-Run Server, it will auto generate i18n view file under "view" dir in each bundle.
+Run Server, it will auto generate i18n view files under "view" dir in each bundle.
 
 ## Uninstall
 

@@ -4,11 +4,17 @@ import (
 	"gopkg.in/orivil/orivil.v1"
 )
 
+const (
+
+// cookie max age
+	Year = 60 * 60 * 24 * 365
+)
+
 type Controller struct {
 	*orivil.App
 }
 
-// SetLang for set the cookie to client, this should be a Ajax request
+// set the cookie to client
 //
 // @route {get}/setlang/::language
 func (c *Controller) Setlang() {
