@@ -1,26 +1,34 @@
-# i18n
+# I18n Bundle
 
-Orivil I18n Bundle
+## Introduction
 
-## Version
+**I18n Bundle** provides a full-featured i18n management system. Automatically generate template files and message files according to the language configuration. Make your project become international immediately, even if your have finish your project.
 
-```
-v1
-```
+## Step By Step
 
-## Introduce
-
-**I18n Bundle** provide a full-featured i18n management system. Automatically generate template files and message files according to the language configuration. Make your project become international immediately, even if your project has been completed.
-
-## Install
+### Install
 
 * make dir "i18n" under your bundle dir
 * cd "i18n" dir
 * git init
 * git remote add i18n https://github.com/orivil/i18n
-* git pull i18n v1
+* git pull i18n master
 
-## Display Languages
+### Configure Languages
+
+Under `i18n/config` directory has a `i18n.yml` file:
+```yaml
+# all languages
+languages:
+  简体中文: "zh-CN"
+  English: "en"
+  Französisch: "fr"
+
+# set default language
+defaultlang: "English"
+```
+
+### Display Languages
 
 Use `DataSender` function to send data to template:
 
@@ -33,9 +41,7 @@ Display data:
 ```html
 {{if $.currentLang}}
 <span>{{$.currentLang}}</span>
-
 <ul>
-
     {{/* range all languages */}}
     {{range $lang, $shortName := .i18nlangs}}
         {{/* except current lang */}}
@@ -47,7 +53,7 @@ Display data:
 {{end}}
 ```
 
-## Sent Ajax Request To Set Language
+### Sent Ajax Request To Set Language
 
 ```html
 <script>
@@ -73,7 +79,7 @@ Display data:
 </script>
 ```
 
-## Register I18n Bundle
+### Register I18n Bundle
 
 ```GO
 server.RegisterBundle (
@@ -82,9 +88,85 @@ server.RegisterBundle (
 )
 ```
 
-## Generate I18n View Files
+### Generate I18n View Files
 
-Run Server, it will auto generate i18n view files under "view" dir in each bundle.
+Before the server starts:
+```
+└── view
+    └── index.tmpl
+```
+
+After the server started:
+
+```
+└── view
+    ├── i18n
+    │   ├── en
+    │   │   └── index.tmpl
+    │   ├── fr
+    │   │   └── index.tmpl
+    │   └── zh-CN
+    │       └── index.tmpl
+    └── index.tmpl
+```
+> **Note:** now we can translate them.
+
+### Generate I18n Messages
+
+Suppose we have messages:
+```GO
+msgUnSignIn := "Please sign in"
+msgIncorrectPass := "Incorrect password"
+```
+
+Add messages to configuration generator:
+
+```GO
+i18n.AddMsgs (
+    msgUnSignIn,
+    msgIncorrectPass,
+)
+```
+
+After the server started, it will generate the default language configuration file `en.yml` under `/i18n/config/msgs` directory:
+
+```
+├── i18n
+│   ├── config
+│   │   ├── i18n.yml
+│   │   └── msgs
+│   │       └── en.yml
+
+```
+Here is the generated file `en.yml`:
+```yaml
+Incorrect password:
+  fr: ""
+  zh-CN: ""
+Please sign in:
+  fr: ""
+  zh-CN: ""
+```
+
+Translate all messages:
+```yaml
+Incorrect password:
+  fr: "Mot de passe incorrect"
+  zh-CN: "密码错误"
+Please sign in:
+  fr: "S'il vous plaît vous connecter"
+  zh-CN: "请登陆"
+```
+
+### Get I18n Message
+
+```GO
+msg := app.FilterI18n(msgUnSignIn)
+
+// if customer language is "zh-CN", msg == "请登陆".
+// if customer language is "en",    msg == "Please sign in"
+// if customer language is "fr",    msg == "S'il vous plaît vous connecter"
+```
 
 ## Uninstall
 
