@@ -19,9 +19,9 @@ const (
 	i18nDir = "i18n"
 )
 
-// Listener listening the server event "EvtConfigProvider", if config option
+// Listener structure listens the server event "EvtConfigProvider", if config option
 // "auto_generate_files" is "true", it will generate not exist i18n
-// view files
+// view files and generate not exist i18n messages.
 type Listener struct{}
 
 func (this *Listener) RegisterService(s *orivil.Server) {}
@@ -46,7 +46,7 @@ func (this *Listener) ConfigServer(s *orivil.Server) {
 		}
 
 		// auto generate I18n messages
-		msgCacheDir := filepath.Join(orivil.DirConfig, "i18n_msgs")
+		msgCacheDir := filepath.Join(orivil.DirBundle, "i18n", "config", "msgs")
 
 		var langs []string
 
@@ -54,9 +54,9 @@ func (this *Listener) ConfigServer(s *orivil.Server) {
 			langs = append(langs, lang)
 		}
 
-		orivil.I18n.Init(msgCacheDir, Config.Languages[Config.DefaultLang], langs)
+		I18n.Init(msgCacheDir, Config.Languages[Config.DefaultLang], langs)
 
-		orivil.UpdateI18nConfig()
+		UpdateI18nConfig()
 	}
 }
 

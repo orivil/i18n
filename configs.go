@@ -11,17 +11,7 @@ var Config = &struct {
 	DefaultLang         string
 	CookieKey           string
 	Auto_generate_files bool
-}{
-
-	// set default value
-	Languages: map[string]string{
-		"简体中文":    "zh-CN",
-		"english": "en",
-	},
-	DefaultLang:         "english",
-	CookieKey:           "i18n-language",
-	Auto_generate_files: true,
-}
+}{}
 
 // sortName: fullName
 var langs map[string]string

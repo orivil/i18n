@@ -1,10 +1,11 @@
-# set all languages, key for displaying, value for setting
+# all languages
 languages:
-  简体中文: "zh-CN"
-  english: "en"
+  "简体中文": "zh-CN"
+  "English": "en"
+  "Französisch": "fr"
 
-# set default language, must be the display name
-defaultlang: "简体中文"
+# set default language
+defaultlang: "English"
 
 # cookie key
 cookiekey: "i18n_language"
